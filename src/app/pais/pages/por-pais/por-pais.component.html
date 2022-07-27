@@ -1,40 +1,26 @@
 <h2>Por pais</h2>
 <hr>
+<!--******************** Input ********************-->
 <div class="row">
     <div class="col">
-        <form autocomplete="off" (ngSubmit)="buscar()">
-            <input type="text" name="termino" placeholder="Buscar Pais" class="form-control" [(ngModel)]="termino">
-        </form>
+       <app-pais-input></app-pais-input>
     </div>
 </div>
+<!--***************** fin Input ************************-->
 
 <hr>
-<div class="alert alert-danger">
+<!--************************* mensaje de error ********************-->
+<div *ngIf="hayError"
+ class="alert alert-danger">
     No se encontro el termino
 </div>
+<!--***************** Fin de Mensaje de error ***********************-->
 
-<div class="row">
+<!--********************* Tabla **************************-->
+<div *ngIf="!hayError" 
+ class="row">
     <div class="col">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Bandera</th>
-                    <th>Nombre</th>
-                    <th>Ponlacion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>bandera</td>
-                    <td>nombre</td>
-                    <td>121212121</td>
-                    <td>
-                        <a href="/pais/cri">Ver ....</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+       <app-pais-tabla [paises]="paises"></app-pais-tabla>
     </div>
 </div>
+<!--************** Fin de tabla *********************-->

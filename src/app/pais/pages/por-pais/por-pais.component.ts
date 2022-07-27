@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Country } from '../../interfaces/pais-interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -9,14 +10,27 @@ import { PaisService } from '../../services/pais.service';
 })
 export class PorPaisComponent {
 
+  //************* */ Llamada del servicio ***********************
   constructor(private paisService:PaisService) { }
 
-  termino:string='Termino';
+  //****************** */ Variables *********************
+  termino:string='';
+  hayError:boolean=true;
+  paises:Country[]=[];
 
+  // ***************** Metodo buscar ***********************
   buscar(){
+    this.hayError=false
     console.log(this.termino)
-    this.paisService.buscarPais(this.termino).subscribe(resp=>{
-      console.log(resp)
+    
+    this.paisService.buscarPais(this.termino)
+    .subscribe((paises)=>{
+      console.log(paises);
+      this.paises= paises;
+
+    },(err)=>{
+      this.hayError=true;
+      this.paises=[];
     })
   }
 
